@@ -10,11 +10,11 @@ tags:
  - HS2
 comments: true
 ---
-In this blog I am going to show you how to enable **High Availability** for **HiveServer2**. The **HiveServer2**, like **NameNode** that at present only allow 2 nodes, does not have any limit on number of servers that can be added to **HA** configuration. Also it doesn't provide any failover mechanism. A client will have to reconnect, in case a connetion to current **HiveServer2** is lost. Below are the requirements to enable **High Availability** for **HiveServer2**.
+In this blog I am going to show you how to enable **High Availability** for **HiveServer2**. The **HiveServer2**, like **NameNode** that at present only allow 2 nodes, does not have any limit on number of servers that can be added to **HA** configuration. Also it doesn't provide any fail-over mechanism. A client will have to reconnect, in case a connection to current **HiveServer2** is lost. Below are the requirements to enable **High Availability** for **HiveServer2**.
 <!--more-->
 
 #### ZooKeeper
-Zookeeper is used to store information about each **HS2** instarnce that is launched and registered with Zookeeper. A client, upon connection request, gets one of the registered **HS2** instance.
+Zookeeper is used to store information about each **HS2** instance that is launched and registered with Zookeeper. A client, upon connection request, gets one of the registered **HS2** instance.
 
 #### Multiple HiveServer2 instances 
 To enable HA more than one instance of **HS2** is required. Multiple instances can run either on the same server with different port for each instance or on two different machines using same port number. If one of the instance fails, Zookeeper will return the next active **HS2** instance. Running multiple instances provides following benefits:
@@ -35,6 +35,9 @@ Let's look at the configuration that is needed for running multiple instances of
 | hive.server2.support.dynamic.service.discovery | Set to true to enable HiveServer2 dynamic service discovery for its clients |
 
 ##### Sample configuration:
+
+Below configuration is deployed on two different hosts. HiveServer2 will be running on default port of 10000.
+
 ```XML
 <property>
   <name>hive.zookeeper.quorum</name>
@@ -82,3 +85,5 @@ Beeline version 1.2.1.2.3.4.0-3485 by Apache Hive
 +----------+-------------+--+
 10 rows selected (2.102 seconds)
 ```
+
+In my next blog I will explain the architecture behind **Hive HA**.

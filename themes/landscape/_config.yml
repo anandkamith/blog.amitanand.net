@@ -2,6 +2,7 @@
 menu:
   Home: /
   Archives: /archives
+  About: about
 rss: /atom.xml
 
 # Content
@@ -12,8 +13,6 @@ fancybox: true
 sidebar: right
 widgets:
 - category
-- tag
-- tagcloud
 - archive
 - recent_posts
 
@@ -25,7 +24,7 @@ index_widgets:
 
 # widget behavior
 archive_type: 'monthly'
-show_count: false
+show_count: true 
 
 # Miscellaneous
 google_analytics:

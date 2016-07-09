@@ -41,7 +41,7 @@ Below configuration is deployed on two different hosts. HiveServer2 will be runn
 ```XML
 <property>
   <name>hive.zookeeper.quorum</name>
-  <value>f-bcpc-vm1.bcpc.example.com:2181,f-bcpc-vm2.bcpc.example.com:2181,f-bcpc-vm3.bcpc.example.com:2181</value>
+  <value>f-bcpc-vm1:2181,f-bcpc-vm2.bcpc:2181,f-bcpc-vm3.bcpc:2181</value>
 </property>
 <property>
   <name>hive.zookeeper.session.timeout</name>
@@ -60,10 +60,9 @@ At this stage after adding the configuration restart **HiveServer2** instance. P
 
 After enabling HA one can connect to **HS** using syntax given below:
 ```bash
-ubuntu@bcpc-vm8:~$ beeline -u  "jdbc:hive2://f-bcpc-vm1.bcpc.example.com:2181,f-bcpc-vm2.bcpc.example.com:2181,f-bcpc-vm3.bcpc.example.com:2181/default;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2;principal=hive/f-
-bcpc-vm3.bcpc.example.com@BCPC.EXAMPLE.COM"
-Connecting to jdbc:hive2://f-bcpc-vm1.bcpc.example.com:2181,f-bcpc-vm2.bcpc.example.com:2181,f-bcpc-vm3.bcpc.example.com:2181/default;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2;principal=hive/f-bcpc-vm3.bcpc.exam
-ple.com@BCPC.EXAMPLE.COM
+ubuntu@bcpc-vm8:~$ export zk="f-bcpc-vm1:2181,f-bcpc-vm2:2181,f-bcpc-vm3:2181"
+ubuntu@bcpc-vm8:~$ export bl="jdbc:hive2://${zk}/default;serviceDiscoveryMode=zooKeeper;"
+ubuntu@bcpc-vm8:~$ beeline -u  "${bl}zooKeeperNamespace=hiveserver2"
 Connected to: Apache Hive (version 1.2.1.2.3.4.0-3485)
 Driver: Hive JDBC (version 1.2.1.2.3.4.0-3485)
 Transaction isolation: TRANSACTION_REPEATABLE_READ

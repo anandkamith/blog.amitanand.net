@@ -10,7 +10,7 @@ tags:
  - HS2
 comments: true
 ---
-In this blog I am going to show you how to enable **High Availability** for **HiveServer2**. The **HiveServer2**, like **HDFS NameNode**, does not have any limit on number of servers that can be added to **HA** configuration. Also it doesn't provide any failover mechanism. A client will have to reconnect, in case a connetion to current **HiveServer2** is lost. Below are the requirements to enable **High Availability** for **HiveServer2**.
+In this blog I am going to show you how to enable **High Availability** for **HiveServer2**. The **HiveServer2**, like **NameNode** that at present only allow 2 nodes, does not have any limit on number of servers that can be added to **HA** configuration. Also it doesn't provide any failover mechanism. A client will have to reconnect, in case a connetion to current **HiveServer2** is lost. Below are the requirements to enable **High Availability** for **HiveServer2**.
 <!--more-->
 
 #### ZooKeeper
